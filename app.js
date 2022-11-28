@@ -3,17 +3,35 @@ const app = Vue.createApp({
     return {
       counter: 0,
       name: '',
-      confirmedName: ''
+      lastName: '',
+      confirmedName: '',
+      fullname: ''
     };
   },
-  computed: {
-    fullname() {
-      console.log('run');
-      if (this.name === '') {
-        return '';
+  watch: {
+    name(value) {
+      if (value === '') {
+        this.fullname = '';
+      } else {
+        this.fullname = value + ' ' + this.lastName;
       }
-      return this.name + ' ' + 'One';
+    },
+    lastName(value) {
+      if (value === '') {
+        this.fullname = '';
+      } else {
+        this.fullname = this.name + ' ' + value;
+      }
     }
+  },
+  computed: {
+    // fullname() {
+    //   console.log('run');
+    //   if (this.name === '') {
+    //     return '';
+    //   }
+    //   return this.name + ' ' + 'One';
+    // }
   },
   methods: {
     confirmInput() {
